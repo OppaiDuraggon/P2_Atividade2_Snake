@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2t82vxldtubl"]
+
+[ext_resource type="Texture2D" uid="uid://fd8uiaiwiyhw" path="res://Sprites/Circle_RED.png" id="1_hotu3"]
+[ext_resource type="Script" path="res://Script/Consumable.cs" id="2_81eu1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yrk0u"]
+
+[node name="Consumable" type="Sprite2D"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_hotu3")
+script = ExtResource("2_81eu1")
+
+[node name="Consumable_Area" type="Area2D" parent="."]
+
+[node name="CollisionShape_Consumable" type="CollisionShape2D" parent="Consumable_Area"]
+scale = Vector2(4.5, 4.5)
+shape = SubResource("CircleShape2D_yrk0u")
+debug_color = Color(0.733002, 2.75549e-06, 6.73831e-07, 0.419608)
+
+[connection signal="area_entered" from="Consumable_Area" to="." method="OnConsumableEntered"]

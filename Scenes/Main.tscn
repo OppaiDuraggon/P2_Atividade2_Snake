@@ -1,0 +1,419 @@
+[gd_scene load_steps=10 format=3 uid="uid://i68t16iobxua"]
+
+[ext_resource type="Script" path="res://Script/Game.cs" id="2_blq4e"]
+[ext_resource type="Script" path="res://Script/UIBannerController.cs" id="3_0qeyn"]
+[ext_resource type="Script" path="res://Script/SnakeController.cs" id="3_btmpu"]
+[ext_resource type="Texture2D" uid="uid://dhn7w73l07atd" path="res://icon.svg" id="4_hbihj"]
+[ext_resource type="Script" path="res://Script/LabyrinthCollision.cs" id="5_gri8g"]
+[ext_resource type="AudioStream" uid="uid://bmmbir2l2vop4" path="res://Sounds/sucessoSFX.wav" id="6_6ifme"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc80m"]
+size = Vector2(34, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dw1pp"]
+size = Vector2(120, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vqpx"]
+size = Vector2(120, 126.108)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("2_blq4e")
+
+[node name="RestartButton" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 608.0
+offset_right = 97.0
+offset_bottom = 640.0
+grow_vertical = 0
+text = "Restart"
+
+[node name="UIBanner" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(576, 320)
+scale = Vector2(2, 2)
+texture = ExtResource("4_hbihj")
+script = ExtResource("3_0qeyn")
+
+[node name="GameStateLabel" type="Label" parent="UIBanner"]
+offset_left = -48.0
+offset_top = -64.0
+offset_right = 48.0
+offset_bottom = -41.0
+text = "Game Lost!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SnakeController" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 48)
+script = ExtResource("3_btmpu")
+
+[node name="SnakeHead" type="Area2D" parent="SnakeController" groups=["Player"]]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SnakeController/SnakeHead"]
+shape = SubResource("RectangleShape2D_lc80m")
+
+[node name="ScoreLabel" type="Label" parent="."]
+z_index = 3
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 165.0
+offset_bottom = 40.0
+text = "Score:"
+
+[node name="TimerLabel" type="Label" parent="."]
+z_index = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1060.0
+offset_top = 15.0
+offset_right = 1140.0
+offset_bottom = 40.0
+grow_horizontal = 0
+text = "Time:"
+
+[node name="GoalSprite" type="Sprite2D" parent="."]
+modulate = Color(4.66868e-06, 0.875961, 0.335481, 1)
+z_index = -1
+position = Vector2(1126.68, 525.83)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_hbihj")
+
+[node name="GoalArea" type="Area2D" parent="GoalSprite"]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalSprite/GoalArea"]
+shape = SubResource("RectangleShape2D_dw1pp")
+
+[node name="Labyrinth" type="Node2D" parent="."]
+z_index = 2
+script = ExtResource("5_gri8g")
+
+[node name="Wall Sprite" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(4.76, 390.96)
+scale = Vector2(0.15, 4.02)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite9" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(161.685, 429.345)
+scale = Vector2(0.15, 1.2)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite9"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite9/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite10" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(659.285, 504.24)
+scale = Vector2(0.15, 0.73)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite10"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite10/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite16" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(730.37, 304.99)
+scale = Vector2(0.15, 0.845)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite16"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite16/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite21" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1029.48, 275)
+scale = Vector2(0.15, 1.425)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite21"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite21/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite13" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(891.305, 556.685)
+scale = Vector2(0.15, 1.395)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite13"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite13/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite17" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(891.305, 80.365)
+scale = Vector2(0.15, 1.395)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite17"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite17/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite18" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1148.67, 223.47)
+scale = Vector2(0.15, 3.9)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite18"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite18/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite15" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1146.9, 608.25)
+scale = Vector2(0.15, 0.645)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite15"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite15/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite4" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(447.82, 641.64)
+rotation = 1.5708
+scale = Vector2(0.15, 7.115)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite4"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite4/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite12" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(330.86, 495.23)
+rotation = 1.5708
+scale = Vector2(0.15, 2.81)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite12"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite12/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite11" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(447.82, 361.17)
+rotation = 1.5708
+scale = Vector2(0.15, 4.575)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite11"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite11/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite20" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1015.02, 361.17)
+rotation = 1.5708
+scale = Vector2(0.15, 2.045)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite20"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite20/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite14" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1024.63, 472.49)
+rotation = 1.5708
+scale = Vector2(0.15, 2.225)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite14"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite14/Wall"]
+position = Vector2(4.57764e-05, -1.52588e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite2" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(580.82, 186.67)
+scale = Vector2(0.15, 2.855)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite2"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite2/Wall"]
+position = Vector2(4.57764e-05, 6.10352e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite3" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(160, 133.05)
+scale = Vector2(2.72, 0.15)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite3"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite3/Wall"]
+position = Vector2(4.57764e-05, 6.10352e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite19" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(668.92, 133.05)
+scale = Vector2(1.36, 0.15)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite19"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite19/Wall"]
+position = Vector2(4.57764e-05, 6.10352e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite7" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(297.09, 245.01)
+scale = Vector2(2.31, 0.15)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite7"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite7/Wall"]
+position = Vector2(4.57764e-05, 6.10352e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite6" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(160, 186.91)
+rotation = 1.5708
+scale = Vector2(0.945, 0.15)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite6"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite6/Wall"]
+position = Vector2(4.57764e-05, 6.10352e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite8" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(433.83, 178.775)
+rotation = 1.5708
+scale = Vector2(1.205, 0.15)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite8"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite8/Wall"]
+position = Vector2(4.57764e-05, 6.10352e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite5" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(346.86, 4.445)
+scale = Vector2(8.605, 0.15)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite5"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite5/Wall"]
+position = Vector2(4.57764e-05, 6.10352e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="Wall Sprite22" type="Sprite2D" parent="Labyrinth"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1038.96, 4.445)
+scale = Vector2(0.585, 0.15)
+texture = ExtResource("4_hbihj")
+
+[node name="Wall" type="Area2D" parent="Labyrinth/Wall Sprite22"]
+input_pickable = false
+
+[node name="Wall Collision" type="CollisionShape2D" parent="Labyrinth/Wall Sprite22/Wall"]
+position = Vector2(4.57764e-05, 6.10352e-05)
+shape = SubResource("RectangleShape2D_3vqpx")
+
+[node name="AudioGameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6ifme")
+
+[node name="AudioWin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6ifme")
+
+[connection signal="pressed" from="RestartButton" to="." method="ResetGame"]
+[connection signal="area_entered" from="GoalSprite/GoalArea" to="Labyrinth" method="OnGoalEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite9/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite10/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite16/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite21/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite13/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite17/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite18/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite15/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite4/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite12/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite11/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite20/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite14/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite2/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite3/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite19/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite7/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite6/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite8/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite5/Wall" to="Labyrinth" method="OnWallEntered"]
+[connection signal="area_entered" from="Labyrinth/Wall Sprite22/Wall" to="Labyrinth" method="OnWallEntered"]
